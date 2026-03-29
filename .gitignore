@@ -1,0 +1,85 @@
+# Project notes
+.notes/**
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.env/
+.venv/
+venv/
+ENV/
+env/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter / notebooks
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Data (raw + processed)
+data/**
+!data/
+!data/.keep
+
+datasets/**
+
+*.csv
+*.tsv
+*.h5
+*.hdf5
+*.npz
+*.npy
+
+# Model artifacts
+checkpoints/**
+
+models/**
+!models/
+!models/.keep
+!models/.gitkeep
+!models/**/*.py
+
+weights/**
+
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.pb
+
+# Training outputs
+runs/
+wandb/
+mlruns/
+tensorboard/
+events.out.tfevents.*
+
+# Cache / temp
+.cache/
+tmp/
+temp/
+
+# CUDA / compiled
+*.cu.o
+*.cubin
+
+# Misc
+*.bak
+*.swp

@@ -1,0 +1,70 @@
+ReconMMT installation and run guide
+===================================
+
+1. Python version
+
+Use Python 3.10 or newer.
+
+2. Install dependencies
+
+Recommended:
+
+python -m pip install --upgrade pip
+python -m pip install torch torchvision pillow onnx
+
+Or from Makefile:
+
+make install
+
+3. Prepare dataset folders
+
+Create this structure:
+
+data/
+  train/
+    rgb/
+    thermal/
+    depth/
+    target/
+  val/
+    rgb/
+    thermal/
+    depth/
+    target/
+  test/
+    rgb/
+    thermal/
+    depth/
+    target/
+
+File names must match across modalities. Example:
+
+frame_001.png in `rgb`, `thermal`, `depth`, and `target`.
+
+4. Verify setup
+
+python -m py_compile main.py train.py test.py models/algo.py
+python main.py smoke-test
+
+If `python main.py smoke-test` fails with `ModuleNotFoundError: No module named 'torch'`, install dependencies first.
+
+5. Train
+
+make train DATA_ROOT=data IMAGE_SIZE=256 BATCH_SIZE=4 EPOCHS=30 OUTPUT_DIR=results/reconmmt
+
+6. Test
+
+make test DATA_ROOT=data CHECKPOINT=results/reconmmt/best_reconmmt.pt IMAGE_SIZE=256 BATCH_SIZE=4
+
+7. Inference
+
+make infer \
+  CHECKPOINT=results/reconmmt/best_reconmmt.pt \
+  RGB=data/test/rgb/frame_001.png \
+  THERMAL=data/test/thermal/frame_001.png \
+  DEPTH=data/test/depth/frame_001.png \
+  OUTPUT=results/reconmmt/infer_frame_001.png
+
+8. Export
+
+make export CHECKPOINT=results/reconmmt/best_reconmmt.pt OUTPUT_DIR=results/reconmmt
